@@ -1,2 +1,5 @@
 node_modules/
 dist/bundle.js
+
+tokens.json
+db.sqlite3
