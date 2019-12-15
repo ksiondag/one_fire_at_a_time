@@ -67,7 +67,7 @@ class Fire(models.Model):
         Args:
             delta - Amount changed
             percentage - Is the delta is in percentage of balance or not?
-            funds - List of funds to update allocation into
+            fund - Specific fund to update allocation of
         """
 
 
