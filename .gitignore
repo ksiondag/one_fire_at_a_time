@@ -1,5 +1,7 @@
 node_modules/
 dist/bundle.js
 
+__pycache__
+
 tokens.json
 db.sqlite3
