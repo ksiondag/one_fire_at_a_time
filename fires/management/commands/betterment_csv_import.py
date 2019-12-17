@@ -1,6 +1,10 @@
 import argparse
 import csv
 
+from django.core.management.base import BaseCommand
+
+from fires.models import Fund, Fire
+
 INTEREST_TRANSACTIONS = [
     "Market Change",
     "Dividend Reinvestment",
@@ -38,14 +42,26 @@ def parse_betterment_transactions(filename):
             print(transaction_descrpiton)
 
 
-def main(args):
-    parser = argparse.ArgumentParser(description="Import Betterment transaction CSV into fires")
-    parser.add_argument("filename")
-    args = parser.parse_args(args)
+def list_funds_and_fires():
+    print("Funds:")
+    for fund in Fund.objects.all():
+        print("  {}".format(fund.name))
+    print()
 
-    parse_betterment_transactions(args.filename)
+    print("Fires:")
+    for fire in Fire.objects.all():
+        print("  {}".format(fire.name))
 
 
-if __name__ == "__main__":
-    import sys
-    main(sys.argv[1:])
+class Command(BaseCommand):
+    help="Import transaction history from Betterment export csv"
+
+    def add_arguments(self, parser):
+        parser.add_argument("filename")
+
+    def handle(self, filename, *args, **kwargs):
+        if filename == "list":
+            list_funds_and_fires()
+            return
+
+        parse_betterment_transactions(filename)
