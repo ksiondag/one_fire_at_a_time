@@ -23,23 +23,23 @@ def parse_betterment_transactions(filename):
     betterment_transactions = csv.DictReader(open(filename, "r"))
 
     for transaction in betterment_transactions:
-        transaction_descrpiton = transaction["Transaction Description"]
-        if transaction_descrpiton in INTEREST_TRANSACTIONS:
+        transaction_description = transaction["Transaction Description"]
+        if transaction_description in INTEREST_TRANSACTIONS:
             # TODO: Interest transaction to fund, spread across fires
             pass
-        elif "Deposit" in transaction_descrpiton:
+        elif "Deposit" in transaction_description:
             # TODO: Deposit into fund, also interaction for fires
             pass
-        elif "Withdrawal" in transaction_descrpiton:
+        elif "Withdrawal" in transaction_description:
             # TODO: Withdrawal from fund, also interaction for fires
             pass
-        elif "Transfer" in transaction_descrpiton:
+        elif "Transfer" in transaction_description:
             # TODO: Transfer to/from another fund (probably needs to be interactive)
             pass
-        elif any([word in transaction_descrpiton for word in IGNORABLE_KEYWORDS]):
+        elif any([word in transaction_description for word in IGNORABLE_KEYWORDS]):
             pass
         else:
-            print(transaction_descrpiton)
+            print(transaction_description)
 
 
 def list_funds_and_fires():

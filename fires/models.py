@@ -99,6 +99,13 @@ class Fund(models.Model):
 # TODO: make an option for balance history with a record of balance changes and what type they were
 
 
+class TransactionHistory(models.Model):
+    fund = models.ForeignKey("Fund", null=False, on_delete=models.CASCADE)
+    delta = models.IntegerField(null=False)
+    date = models.DateField(null=False)
+    description = models.CharField(max_length=255)
+
+
 class FireDistribution(models.Model):
     class Meta:
         unique_together = ["fund", "fire"]
